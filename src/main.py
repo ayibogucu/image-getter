@@ -42,7 +42,7 @@ for y in range(STEP_NUM[0]):
 
 # SAVE THE BUFFER TO FILE
 img = pylon.PylonImage()
-for i in range(STEP_NUM[0] * STEP_NUM[1]):
+for i in range(STEP_NUM[0] * STEP_NUM[1] + 1):
     with camera.RetrieveResult(2000) as result:
         # Calling AttachGrabResultBuffer creates another reference to the
         # grab result buffer. This prevents the buffer's reuse for grabbing.
