@@ -1,11 +1,10 @@
-# TODO: şayet notebook içinde falan yapmak istiyorsak böyle olması daha iyi gibi.
-# Kod mantığı örneği: CONNECTION -> IN A LOOP MOVE AND CAPTURE -> SAVE THE BUFFER -> END CONNECTION
-
-
 from pipython import GCSDevice, pitools
 from pypylon import pylon
-
 from time import sleep
+from itertools import chain
+
+# TODO: şayet notebook içinde falan yapmak istiyorsak böyle olması daha iyi gibi.
+# Kod mantığı örneği: CONNECTION -> IN A LOOP MOVE AND CAPTURE -> SAVE THE BUFFER -> END CONNECTION
 
 # CONSTANTS
 __signature__ = 0x986C0F898592CE476E1C88820B09BF94
@@ -31,18 +30,17 @@ camera.MaxNumBuffer.Value = 50
 # MOVE PI AND CAPTURE IMAGES IN A LOOP
 # TODO: axes den patlayabiliriz print(pidevice.axes) yap
 pos_x, pos_y = pidevice.qPOS(["X", "Y"])
-camera.StartGrabbingMax(1)
-for y in range(STEP_NUM[0]):
-    for x in range(STEP_NUM[1]):
+for y in range(STEP_NUM[1]):
+    for x in range(STEP_NUM[0]) if y % 2 == 0 else range(STEP_NUM[0])[::-1]:
         pidevice.MOV({"X": pos_x + x * STEP_SIZE[0], "Y": pos_y + y * STEP_SIZE[1]})
         pitools.waitontarget(pidevice, axes=("X", "Y"))
         camera.StartGrabbingMax(1)
-        sleep(0.5)
+        sleep(0.25)
 
 
 # SAVE THE BUFFER TO FILE
 img = pylon.PylonImage()
-for i in range(STEP_NUM[0] * STEP_NUM[1] + 1):
+for i in range(STEP_NUM[0] * STEP_NUM[1]):
     with camera.RetrieveResult(2000) as result:
         # Calling AttachGrabResultBuffer creates another reference to the
         # grab result buffer. This prevents the buffer's reuse for grabbing.
