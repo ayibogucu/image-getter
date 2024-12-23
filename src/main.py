@@ -1,7 +1,6 @@
 from pipython import GCSDevice, pitools
 from pypylon import pylon
 from time import sleep
-from itertools import chain
 
 # TODO: şayet notebook içinde falan yapmak istiyorsak böyle olması daha iyi gibi.
 # Kod mantığı örneği: CONNECTION -> IN A LOOP MOVE AND CAPTURE -> SAVE THE BUFFER -> END CONNECTION
