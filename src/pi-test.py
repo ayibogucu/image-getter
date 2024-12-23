@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""This example helps you to get used to PIPython."""
+
 # (c)2016 Physik Instrumente (PI) GmbH & Co. KG
 # Software products that are provided by PI are subject to the
 # General Software License Agreement of Physik Instrumente (PI) GmbH & Co. KG
@@ -11,12 +15,9 @@
 
 from pipython import GCSDevice, pitools
 
-# TODO: WHAT IS THIS?
 __signature__ = 0x986C0F898592CE476E1C88820B09BF94
 
 CONTROLLERNAME = "C-884.DB"  # 'C-884' will also work
-
-# TODO: WHAT ARE THOOOOSEEEE?
 STAGES = ["M-111.1DG", "M-122.2DD", "NOSTAGE", "NOSTAGE"]
 REFMODES = ["FNL", "FRF"]
 
@@ -123,3 +124,4 @@ if __name__ == "__main__":
     # from pipython import PILogger, DEBUG, INFO, WARNING, ERROR, CRITICAL
     # PILogger.setLevel(DEBUG)
     main()
+
